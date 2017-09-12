@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+$conn=mysql_connect("localhost", "root", "") or die("Cannot connect to local host");
+mysql_select_db("ecpi", $conn) or die("Cannot connect to ecpi database");
+?>
+  <title>ECPI 3D Printer Lab</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
+  		<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="Stylesheet.css" />	
+	
+
+</head>
+<body>
+<!-- NAVIGATION -->
+<nav class="navbar navbar-default" style="position: fixed; width:100%;">
+  <div class="container">
+    <div class="navbar-header">
+     <a href="https://www.ecpi.edu">		
+			<img src="brand1.png" alt="ECPI Logo" >
+		</a>
+				
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+		
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+			<a href="#studentModalLogin" data-toggle="modal" data-target="#studentModalLogin"><span class="glyphicon glyphicon-user"></span> Student Login</a>
+		</li>
+		<li>
+			<a href="#instructorModalLogin" data-toggle="modal" data-target="#instructorModalLogin"><span class="glyphicon glyphicon-user"></span> Instructor Login</a>
+		</li>
+		<li>
+			<a href="#myModalRegister" data-toggle="modal" data-target="#myModalRegister"><span class="glyphicon glyphicon-log-in"></span> Register</a>
+		</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--STUDENT LOGIN MODAL -->
+<div class="modal fade" id="studentModalLogin">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post"action="loginVerifyStudent.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Student Log-in</h4>
+				</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="InputEmail1">Email address</label>
+					<input class="form-control" id="InputEmail1" placeholder="Enter email" type="email" required>
+				</div>
+				<div class="form-group">
+					<label for="InputPassword">Password</label>
+					<input class="form-control" id="InputPassword" placeholder="Password" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+				</div>
+				<div class="form-group">
+					<label for="IDNumber">ID Number</label>
+					<input class="form-control" id="IDNumber" placeholder="ID Number" type="number" required>
+				</div>
+				<p class="text-right"><a href="#">Forgot password?</a></p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Log-in</button>
+				<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+			  
+			  
+			  <?php
+$mess="Please enter your login info";
+
+if(isset($_GET['m'])){
+    $mess=$_GET['m'];
+    }
+ ?>
+			</div>
+		  </div>
+		</form>  
+	</div>
+</div>
+<!-- END STUDENT LOGIN MODAL -->
+
+<!--INSTRUCTOR LOGIN MODAL -->
+<div class="modal fade" id="instructorModalLogin">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post"action="loginverify.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Instructor Log-in</h4>
+				</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="InputEmail1">Email address</label>
+					<input class="form-control" name="InputEmail1" id="InputEmail1" placeholder="Enter email" type="email" required>
+				</div>
+				<div class="form-group">
+					<label for="InputPassword">Password</label>
+					<input class="form-control" name="InputPassword" id="InputPassword" placeholder="Password" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+				</div>
+				<div class="form-group">
+					<label for="IDNumber">ID Number</label>
+					<input class="form-control" id="IDNumber" placeholder="ID Number" type="number" required>
+				</div>
+				<p class="text-right"><a href="#">Forgot password?</a></p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Log-in</button>
+				<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+			  
+			</div>
+		  </div>
+		</form>  
+	</div>
+</div>
+
+<?php
+$mess="Please enter your login info";
+
+if(isset($_GET['m'])){
+    $mess=$_GET['m'];
+    }
+ ?>
+
+<!--END INSTRUCTOR LOGIN MODAL -->
+	
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="myModalRegister">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post" action="registerverify.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Register User</h4>
+				</div>
+				<div class="modal-body">
+				
+						<div class="form-group">
+						<label for="AddEmail">Email address</label>
+						<input id="AddEmail" name="AddEmail" placeholder="Enter email" type="email" required>
+						</div>
+						<div class="form-group">
+					
+						<label for="AddPassword">Password</label>
+						<input id="AddPassword" name="AddPassword" placeholder="Password"  type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" onchange="form.cPsw.pattern = this.value;">
+						</div>
+					<div class="form-group">
+						<label for="AddPassword">Verify Password</label>
+						<input id="AddPassword" placeholder="Verify Password" type="password" name="AddPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+					
+					</div>
+						<label for="userType"></label>
+						<select class="form-control" id="userType" placeholder="User Type" required>
+						<option value="studentUser"> Student/Alumni   </option>
+						<option value="InstructorUser"> Instructor   </option>
+						<option value="otherUser"> Other </option>
+						
+						</select>
+				
+				</div>
+				
+				<div class="modal-footer">
+				  
+					 <button type="submit" name="button" id="button" class="btn btn-primary">Register</button>
+					
+
+					
+
+					
+					
+					<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+	
+	
+	
+<!-- END REGISTER MODAL -->
+
+
+
+<!-- END NAVIGATION -->
+
+
+<div class="jumbotron" id="jumbo">
+<div class="container" id="blueBackground">
+	<h1>3D Printer Lab Frequently Asked Questions</h1>
+
+	<div class="row">
+		<div class="col-lg-1">
+		</div>
+		
+		<p>
+			<b>How long will my print take to finish?</b><br />
+			 Print time all depends on the detail, size, and design of your print. 
+		</p>
+		
+		<div class="col-lg-5">
+			
+		</div>	
+		<div class="col-lg-1">
+		</div>
+	</div>
+</div>
+<footer>
+  <a href="#"> FAQ </a> | <a href="#"> CONTACT </a> | <a href="#"> ECPI.EDU </a>
+</footer>  
+
+
+
+
+
+
+
+
+</body>
+</html>

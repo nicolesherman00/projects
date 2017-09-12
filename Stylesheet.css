@@ -1,0 +1,107 @@
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: -1px;
+	  margin-top: 0;
+	  padding-top:0;
+      border-radius: 0;
+	  background-color: #555;
+	  z-index: 9;
+	  
+	}
+	
+	.nav.navbar-nav.navbar-right li a {
+    color: white;
+}
+	.nav.navbar-nav li a {
+		    color: white;
+			display:inline-block;
+
+	}
+	.navbar-nav li:not(:last-child){
+    border-right: 4px groove white
+}
+	#jumbo{
+		text-align: center;
+	}
+	#jumbo p{
+		font-size: 16px;
+	}
+	
+	#banner {
+	background-color:	#0A4B9F; 
+	color:white; 
+	text-shadow: 3px 3px black;
+	margin-top: -5px;
+	text-align: center;
+
+	}
+	
+	#gallery img{
+		width:300px;
+		height:300px;
+	}
+	
+	
+	.row-centered {
+    text-align:center;
+	
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+	div.background {
+    
+}
+
+	body{
+		
+		height:100%;		
+	}
+	html{
+		height:100%;
+	}
+    /* Set gray background color and 100% height */
+    .sidenav {
+		padding-top: 20px;
+		background: url(background4.jpg);
+		background-size: cover;
+		height:100%;
+    }
+
+
+
+
+
+
+    
+    /* Set black background color, white text and some padding */
+    footer {
+		background-color: #555;
+		text-align:center;
+		color: white;
+		padding: 5px;
+		bottom:0;
+		width:100%;
+		height:auto;   /* Height of the footer */
+	position: fixed;
+
+
+    }
+    
+
+
+.carousel-indicators {
+  bottom:-15px;
+}
+	
+	

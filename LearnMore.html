@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+$conn=mysql_connect("localhost", "root", "") or die("Cannot connect to local host");
+mysql_select_db("ecpi", $conn) or die("Cannot connect to ecpi database");
+?>
+  <title>ECPI 3D Printer Lab</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
+  		<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="Stylesheet.css" />	
+	
+
+</head>
+<body>
+<!-- NAVIGATION -->
+<nav class="navbar navbar-default" style="position: fixed; width:100%;">
+  <div class="container">
+    <div class="navbar-header">
+     <a href="https://www.ecpi.edu">		
+			<img src="brand1.png" alt="ECPI Logo" >
+		</a>
+				
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+		
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+			<a href="#studentModalLogin" data-toggle="modal" data-target="#studentModalLogin"><span class="glyphicon glyphicon-user"></span> Student Login</a>
+		</li>
+		<li>
+			<a href="#instructorModalLogin" data-toggle="modal" data-target="#instructorModalLogin"><span class="glyphicon glyphicon-user"></span> Instructor Login</a>
+		</li>
+		<li>
+			<a href="#myModalRegister" data-toggle="modal" data-target="#myModalRegister"><span class="glyphicon glyphicon-log-in"></span> Register</a>
+		</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--STUDENT LOGIN MODAL -->
+<div class="modal fade" id="studentModalLogin">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post"action="loginverifystudent.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Student Log-in</h4>
+				</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="InputEmail1">Email address</label>
+					<input class="form-control" name="InputEmail1" id="InputEmail1" placeholder="Enter email" type="email" required>
+				</div>
+				<div class="form-group">
+					<label for="InputPassword">Password</label>
+					<input class="form-control" name="InputPassword" id="InputPassword" placeholder="Password" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+				</div>
+				<div class="form-group">
+					<label for="IDNumber">ID Number</label>
+					<input class="form-control" id="IDNumber" placeholder="ID Number" type="number" required>
+				</div>
+				<p class="text-right"><a href="#">Forgot password?</a></p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Log-in</button>
+				<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+			  <?php echo htmlentities($user_message) ?>
+			  
+			  <?php
+$mess="Please enter your login info";
+
+if(isset($_GET['m'])){
+    $mess=$_GET['m'];
+    }
+ ?>
+			  
+			  
+			  
+			</div>
+		  </div>
+		</form>  
+	</div>
+</div>
+
+
+<!-- END STUDENT LOGIN MODAL -->
+
+<!--INSTRUCTOR LOGIN MODAL -->
+<div class="modal fade" id="instructorModalLogin">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post"action="loginverify.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Instructor Log-in</h4>
+				</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="InputEmail1">Email address</label>
+					<input class="form-control" name="InputEmail1" id="InputEmail1" placeholder="Enter email" type="email" required>
+				</div>
+				<div class="form-group">
+					<label for="InputPassword">Password</label>
+					<input class="form-control" name="InputPassword" id="InputPassword" placeholder="Password" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+				</div>
+				<div class="form-group">
+					<label for="IDNumber">ID Number</label>
+					<input class="form-control" id="IDNumber" placeholder="ID Number" type="number" required>
+				</div>
+				<p class="text-right"><a href="#">Forgot password?</a></p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Log-in</button>
+				<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+			  
+			</div>
+		  </div>
+		</form>  
+	</div>
+</div>
+
+<?php
+$mess="Please enter your login info";
+
+if(isset($_GET['m'])){
+    $mess=$_GET['m'];
+    }
+ ?>
+
+<!--END INSTRUCTOR LOGIN MODAL -->
+	
+<!-- REGISTER MODAL -->
+<div class="modal fade" id="myModalRegister">
+	<div class="modal-dialog">
+		<form class="modal-content animate" method="post" action="registerverify.php" data-toggle="validator" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Register User</h4>
+				</div>
+				<div class="modal-body">
+				
+						<div class="form-group">
+						<label for="AddEmail">Email address</label><br />
+							<input id="AddEmail" name="AddEmail" style="width: 100%" placeholder="user@email.com" type="email" required>
+						</div>
+						<div class="form-group">
+					
+						<label for="AddPassword">Password</label><br />
+							<input id="AddPassword" name="AddPassword"style="width: 100%"  type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" onchange="form.cPsw.pattern = this.value;">
+						</div>
+					<div class="form-group">
+						<label for="AddPassword">Verify Password</label><br />
+							<input id="AddPassword" style="width: 100%" type="password" name="AddPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
+					
+					</div>
+						<label for="userType"></label>
+						<select class="form-control" id="userType" placeholder="User Type" required>
+							<option value="studentUser"> Student/Alumni   </option>
+							<option value="InstructorUser"> Instructor   </option>
+							<option value="otherUser"> Other </option>
+						
+						</select>
+						<div class="form-group">
+					<label for="IDNumber">ID Number</label>
+					<input class="form-control" id="IDNumber"  type="number" required>
+				</div>
+				<script src='https://www.google.com/recaptcha/api.js'></script>
+<form id="comment_form" action="recaptcha.php" method="post" required>
+	<!-- RECAPTCHA -->
+	<div class="g-recaptcha" data-sitekey="6LfldBkUAAAAAEh5xSqZPOoWRmTlPKvZBb3oLVF1"></div>
+	<!--End RECAPTCHA -->
+</form>
+				</div>
+				
+				<div class="modal-footer">
+				  
+					 <button type="submit" name="button" id="button" class="btn btn-primary">Register</button>
+					
+
+					
+
+					
+					
+					<button data-dismiss="modal" class="btn" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Close</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+	
+	
+	
+<!-- END REGISTER MODAL -->
+
+
+
+<!-- END NAVIGATION -->
+
+
+	<div class="container" id="banner">
+		<h1 style="font-size: 60px; margin-top: 60px;">ECPI Innsbrook 3D Printer LAB</h1>
+	</div>	
+<div class="row">
+<br /><br />
+		<div class="col-lg-1">
+		</div>
+		
+		<div class="row">
+		<div class="col-md-12" align="center">
+			<p style="font-size: 25px"><a href="#Projects"> Projects </a> | <a href="http://www.ecpi.edu"> ECPI.edu </a> | <a href="#OrderQuery"> Order Query </a> | <a href="#OrderStatus"> Order Status's </a></p>
+		</div>
+	</div>
+	<hr />
+</div>
+
+<div class="jumbotron" id="jumbo">
+<div class="container" id="blueBackground">
+	
+
+		
+		<h4>3D Printing</h4>
+			<p><img src="2.jpg" alt="Lab" height="300" width="300"  ALIGN="left">            3D Printing is “the action or process of making a physical object from a three-dimensional digital model, typically by laying down many thin layers of a material in succession”
+
+				    It is a process that allows you <img src="1.jpg" alt="Lab" height="300" width="300"  ALIGN="right">to create an object on the computer, and then you can send it to the 3D printer to have the object that was designed on the computer,
+				to a solid three dimensional object that is printed with hard plastic The object that is created on the computer is sliced down into little flat pieces that later is layered 
+				on top of each other to create the full object. The layers are cut thin but when they are added on top of each other, they form together and solidify to make a strong plastic,
+				or other material, object that can even be used as parts if you design it to work with a mechanical object.
+				Even though 3D printing sounds like a new technology, it is actually a process that has been around for more than thirty years. It was invented by Chuck Hill and called 
+				it stereolithographic in 1983. He described the process called stereolithographic as “a method and apparatus for making solid objects by successfully “printing” thin layers
+				of the ultraviolet curable material one on top of the other” -(Chuck Hull, 1983). As he kept exploring the possibilities, how found the process of printing with the curable 
+				liquids and was then patented. Hull then founded a company of the 3DSystems that he later began to realize that his techniques were not just solely limited to other liquids 
+				and then he changed the patent. After he found out that the process is not just limited to liquids, that he could use any material that is capable of solidifying or changing 
+				its physical state to later create an object. With all of this now discovered, he founded a company and process that is known today as additive manufacturing or also known
+				today as 3D printing.</br><center><img src="3.jpg" alt="Lab" height="300" width="500"  ALIGN="center">
+			</p>
+			<p>
+			
+			</p>
+		
+		<div class="col-lg-5">
+			
+		</div>	
+		<div class="col-lg-1">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+		<!-- BEGIN FAQ CAROUSEL -->	
+
+			<div id="updatesCarousel" class="carousel slide" data-ride="carousel">
+				
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<h3> How does 3D printing work? </h3>  
+						<p>To create a 3D printed object, you use an “additive process”. The three-dimensional object is created by laying down successive layers of material until the object is finished. </p>
+					</div>
+
+					<div class="item">
+						<h3> What is 3D printing good for? </h3>  
+						<p>On the industrial side of things, 3D printing has enabled different industries, from the healthcare to the automotive industry, to do things never before possible and bring products to the market much faster.
+						One spectacular area where 3D printing excels is in the medical area. Custom-built prostheses, 3D printed tissue are becoming more common in labs.
+						But 3D printing also is strong when it comes to manufacturing small batches of goods. One example: the aerospace industries’ ability to 3D print small jet engine components with complex inner channeling, making the engine more fuel efficient. This would never have been possible with the traditional method of CNC milling.
+						</p>
+					</div>
+
+					<div class="item">
+						<h3> What are the benefits of 3D printing? </h3> 
+						<p>Like most emerging technologies, 3D printing offers benefits in a lot of areas. These include improvements in financial, logistical, healthcare, creative and environmental areas.
+						For one, the technology allows for endless customization with regards to design and material. One notable example of this benefit is in the healthcare sector. Complex prosthetic limbs can be produced precisely to individual needs for a much lower price.
+						</p>
+					</div>
+
+					<div class="item">
+						<h3> What are the limitations of 3D printing? </h3>  
+						<p>Although it is already deeply implemented in the world of prototyping, 3D printing is still some years away from having a breakthrough in the world of manufacturing. This breakthrough would allow 3D printing to spread from just prototyping, with the exception of select components already being manufactured by 3D printers, to being widely implemented in everyday manufacturing processes all over the world.
+						The main aspect keeping this from happening sooner is the relatively long time it takes to 3D print something that can just as well be manufactured using traditional methods (and we all know that time means money).
+						3D printing is also limited by the size of the 3D printer. Although there are some pretty big units 3D printing with cement, for example, high-quality and precision parts are limited to smaller machines which can also be very expensive depending on what they are designed to be capable of.
+						Another limitation is the fact that most 3D printers can only print in one material at a time. Multi-material 3D printers do exist, though, but are not very common yet.
+						</p>
+					</div>
+					<div class="item">
+						<h3>Is there a difference between 3D printing and additive manufacturing? </h3>  
+						<p>The short answer is no. The term “3D printing” comes from the use of inkjet printer heads (in the first 3D printers) to deposit, either layers of UV-curable photopolymer resin or a binding material onto a layer of powder in a powder bed process. However, the term now universally encompasses all additive manufacturing technologies.
+						The more technical, or correct, way of referring to the automated process of building a 3D object from scratch using a digital file is “additive manufacturing”.
+
+						</p>
+					</div>
+					<div class="item">
+						<h3>Is 3D printing only good for plastic?</h3>  
+						<p>No. 3D printing can be done using with a very wide variety of materials. Literally, just about any material can be 3D printed as long as it has a practical solid state. For example, a gaseous material like oxygen has a solid state, but only at a very low temperature which makes it impractical and pointless to 3D print with.
+						Most desktop 3D printers can only print thermoplastics. But some of these 3D printing filaments can be enriched by adding e.g. wood, metal or other materials. Printing machines as used in 3D printing services can also print ceramics or precious metals. And there are 3D printers used in the building industry that can even handle concrete or clay-straw mixtures. Below you can see a huge WASP 3D printer build a shelter structure in Italy.
+
+
+						</p>
+					</div>
+					
+					<div class="item">
+						<h3>Are 3D printed goods as good as those manufactured “traditionally”?</h3>  
+						<p>This depends on the product in question. Arguably, a 3D printed Japanese kitchen knife will not be as sharp as, or retain its edge as good as an authentic, carefully forged steel blade.
+						On the other hand, 3D printing has enabled certain products to be improved beyond the capabilities of traditional manufacturing processes like jet engine components.
+						But on a general level, it would be a subjective statement to suggest that a certain 3D printed product is better or worse than its traditional counterpart. Seen on an economic level, 3D printing is on its way to becoming a very efficient, resourceful, and cost effective means of production and will probably surpass conventional manufacturing processes in those aspects in the future.
+
+
+
+						</p>
+					</div>
+					
+					<div class="item">
+						<h3>REFRENCES</h3>  
+						<p>Richmond, E. (2016). ECPI™ University Richmond. Retrieved from https://all3dp.com/3d-printing-3d-printer-guide-101-questions/
+						</p>
+					</div>
+					
+				</div>
+
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#updatesCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#updatesCarousel"  role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+				
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#updatesCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#updatesCarousel" data-slide-to="1"></li>
+					<li data-target="#updatesCarousel" data-slide-to="2"></li>
+					<li data-target="#updatesCarousel" data-slide-to="3"></li>
+				</ol>
+			</div>
+<!-- END UPDATES CAROUSEL -->
+		</div>
+	</div>
+	<br />
+</div>
+</div>
+<!-- 		GALLERY Container		-->
+<div id="Projects" class="container-fluid text-center">
+  <h2>PROJECTS</h2>
+  <h4>3D Printer Creations</h4>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project1.jpg" alt="3D Printed Boat" style="width:100%">
+          <div class="caption">
+            <h3><strong>RC BOAT</strong></h3>
+			<p>An EET class project by: Firstname Lastname, Firstname Lastname, & Firstname Lastname. </p>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <a href="/w3images/nature.jpg" target="_blank">
+         <img src="pics/Project3.jpg" alt="3D Printed Prosthetic Arm/Hand" style="width:100%">
+          <div class="caption">
+            <h3><strong>PROSTHETIC ARM/HAND</strong></h3>
+			<p>A project done by our own EET instructor Dr. G.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project4.jpg" alt="Misc 3D Prints" style="width:100%">
+			<h3><strong>MISC PRINTS</strong></h3>
+			<p>A variety of small 3D printed projects.</p>
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+	<div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project5.jpg" alt="Misc 3D Prints" style="width:100%">
+			<h3><strong>MISC PRINTS</strong></h3>
+			<p>A variety of small 3D printed projects.</p>
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+	<div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project6.jpg" alt="Misc 3D Prints" style="width:100%">
+			<h3><strong>MISC PRINTS</strong></h3>
+			<p>A variety of small 3D printed projects.</p>
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+	<div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project7.jpg" alt="Misc 3D Prints" style="width:100%">
+			<h3><strong>MISC PRINTS</strong></h3>
+			<p>A variety of small 3D printed projects.</p>
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+	<div class="col-md-3">
+      <div class="thumbnail">
+          <img src="pics/Project8.jpg" alt="Misc 3D Prints" style="width:100%">
+			<h3><strong>MISC PRINTS</strong></h3>
+			<p>A variety of small 3D printed projects.</p>
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<footer style="position: fixed; width:100%;">
+	
+	
+	<!-- CONTACT Pop-up --->
+
+	<a href="JavaScript:newPopup('contactPop.html');"> CONTACT  </a>
+	 
+	<!-- end CONTACT -->
+
+	| <a href="#"> ECPI.EDU </a>
+</footer>  
+
+
+
+
+
+
+<script type="text/javascript">
+// Popup window code
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=300,width=1000,left=10,top=10,resizable=yes,scrollbars=no,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+}
+</script>
+
+</body>
+</html>
