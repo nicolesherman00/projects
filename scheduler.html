@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ECPI 3D Printer Scheduler</title>
+</head>
+<body>
+
+<h1 style="color:rgb 47, 159, 225">Choose an Appointment Day and Time for This Week</h1>
+
+<form action="schedulerapprover.php" method="post">
+<p>Enter your username <input type="text" name="user_name" /></p>
+<table border="1">
+
+<tr>
+<td>Schedule Appointment</td><td>8:00AM</td><td>9:00Am</td><td>10:00AM</td>
+<td>11:00AM</td><td>12:00PM</td><td>01:00PM</td><td>02:00PM</td><td>03:00PM</td>
+<td>04:00PM</td><td>05:00PM</td>
+</tr>
+
+<tr>
+<td>Monday</td><td><input type="radio" name="schedule_appt_mon" id="Mon8AM" value="Mon 8AM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon9AM" value="Mon 9AM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon10AM" value="Mon 10AM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon11AM" value="Mon 11AM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon12PM" value="Mon 12PM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon1PM" value="Mon 1PM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon2PM" value="Mon 2PM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon3PM" value="Mon 3PM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon4PM" value="Mon 4PM"></td>
+<td><input type="radio" name="schedule_appt_mon" id="Mon5PM" value="Mon 5PM"></td>
+</tr>
+
+<tr>
+<td>Tuesday</td><td><input type="radio" name="schedule_appt_tues" id="Tues8AM" value="Tues 8AM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues9AM" value="Tues 9AM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues10AM" value="Tues 10AM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues11AM" value="Tues 11AM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues12PM" value="Tues 12PM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues1PM" value="Tues 1PM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues2PM" value="Tues 2PM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues3PM" value="Tues 3PM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues4PM" value="Tues 4PM"></td>
+<td><input type="radio" name="schedule_appt_tues" id="Tues5PM" value="Tues 5PM"></td>
+</tr>
+
+<tr>
+<td>Wednesday</td><td><input type="radio" name="schedule_appt_wed" id="Wed8AM" value="Wed 8AM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed9AM" value="Wed 9AM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed10AM" value="Wed 10AM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed11AM" value="Wed 11AM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed12PM" value="Wed 12PM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed1PM" value="Wed 1PM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed2PM" value="Wed 2PM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed3PM" value="Wed 3PM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed4PM" value="Wed 4PM"></td>
+<td><input type="radio" name="schedule_appt_wed" id="Wed5PM" value="Wed 5PM"></td>
+</tr>
+
+<tr>
+<td>Thursday</td><td><input type="radio" name="schedule_appt_thurs" id="Thur8AM" value="Thurs 8AM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur9AM" value="Thurs 9AM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur10AM" value="Thurs 10AM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur11AM" value="Thurs 11AM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur12PM" value="Thurs 12PM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur1PM" value="Thurs 1PM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur2PM" value="Thurs 2PM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur3PM" value="Thurs 3PM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur4PM" value="Thurs 4PM"></td>
+<td><input type="radio" name="schedule_appt_thurs" id="Thur5PM" value="Thurs 5PM"></td>
+</tr>
+
+<tr>
+<td>Friday</td><td><input type="radio" name="schedule_appt_fri" id="Fri8AM" value="Fri 8AM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri9AM" value="Fri 9AM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri10AM" value="Fri 10AM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri11AM" value="Fri 11AM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri12PM" value="Fri 12PM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri1PM" value="Fri 1PM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri2PM" value="Fri 2PM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri3PM" value="Fri 3PM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri4PM" value="Fri 4PM"></td>
+<td><input type="radio" name="schedule_appt_fri" id="Fri5PM" value="Fri 5PM"></td>
+</tr>
+
+</table>
+<input type="submit" value="Submit">&nbsp;<input type="reset" value="Clear Form">&nbsp;
+</form>
+
+</body>
+</html>
